@@ -377,6 +377,7 @@ h1 {
 .header {
     position: fixed; /* تثبيت العنصر */
     top: 0; /* محاذاة مع أعلى الصفحة */
+    left: 0;
     width: 100%; /* احتلال العرض الكامل */
     z-index: 1000; /* ضمان ظهوره فوق باقي العناصر */
     background-image: url(./Untitled-1.jpg); /* خلفية مطابقة */
@@ -392,13 +393,15 @@ h1{
 /* تنسيق الصورة داخل الهيدر */
 .yaya {
     display: flex;
-    justify-content: center; /* توسيط الصورة أفقياً */
+    justify-content: right; /* توسيط الصورة أفقياً */
     align-items: center; /* توسيط الصورة عمودياً */
     margin: 0 auto; /* توسيط الصورة داخل الهيدر */
 }
 
 .yaya img {
     max-width: 130%; /* عرض الصورة يتناسب مع العرض */
+    width: 500px;
+    height: auto;
     height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
     object-fit: contain; /* الحفاظ على النسب الأصلية للصورة */
 }
@@ -423,8 +426,9 @@ h1{
     }
 
     .yaya img {
-        max-width: 80%; /* تقليل عرض الصورة */
+        max-width: 150%; /* تقليل عرض الصورة */
         height: auto; /* الحفاظ على النسبة */
+        margin-left: 2px;
     }
 
     .container {
@@ -438,7 +442,11 @@ h1{
     }
 
     .yaya img {
-        /* max-width: 70%; تقليل أكبر للصورة */
+        max-width: 100%; /* تقليل أكبر للصورة */
+        margin-left: 0px;
+    }
+    .header{
+        margin-left: 0px;
     }
 }
 
@@ -448,7 +456,7 @@ h1{
     }
 
     .yaya img {
-        max-width: 60%; /* تصغير أكبر للصورة */
+        max-width: 100%; /* تصغير أكبر للصورة */
     }
 }
 
