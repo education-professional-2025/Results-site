@@ -122,7 +122,7 @@ h1 {
 }
 @media (max-width: 300px) {
     h1 {
-        margin-top: 50px; /* زيادة المسافة العلوية */
+        margin-top: 30px; /* زيادة المسافة العلوية */
         font-size: 18px; /* حجم أصغر للنص */
     }
 
@@ -426,7 +426,7 @@ h1{
     }
 
     .yaya img {
-        max-width: 130%; /* تقليل عرض الصورة */
+        max-width: 150%; /* تقليل عرض الصورة */
         height: auto; /* الحفاظ على النسبة */
         margin-left: 2px;
     }
@@ -442,7 +442,7 @@ h1{
     }
 
     .yaya img {
-        max-width: 70%; /* تقليل أكبر للصورة */
+        max-width: 100%; /* تقليل أكبر للصورة */
         margin-left: 0px;
     }
     .header{
@@ -456,7 +456,7 @@ h1{
     }
 
     .yaya img {
-        max-width: 60%; /* تصغير أكبر للصورة */
+        max-width: 100%; /* تصغير أكبر للصورة */
     }
 }
 
