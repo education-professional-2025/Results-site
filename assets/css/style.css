@@ -400,7 +400,7 @@ h1{
 
 .yaya img {
     max-width: 130%; /* عرض الصورة يتناسب مع العرض */
-    width: 500px;
+    width: 400px;
     height: auto;
     height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
     object-fit: contain; /* الحفاظ على النسب الأصلية للصورة */
