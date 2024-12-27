@@ -32,7 +32,7 @@ const gradeRanges = {
         'اللغة العربية': { max: 600, min: 240 },
         'التاريخ': { max: 300, min: 120 },
         'الجغرافيا': { max: 400, min: 160 },
-        'اللغة الانكليزية': { max: 300, min: 120 },
+        'اللغة الانكليزية': { max: 400, min: 160 },
         'اللغة الفرنسية': { max: 300, min: 120 },
         'التربية الاسلامية': { max: 200, min: 80 },
         'التربية الوطنية': { max: 200, min: 80 },
@@ -67,7 +67,7 @@ function loadData() {
             .then(csv => {
                 const lines = csv.split('\n');
                 const fileHeaders = lines[0].split(',').map(header => header.trim());
-                headers[branch] = [...fileHeaders, 'النتيجة'];
+                headers[branch] = [...fileHeaders, ' باقي المواد '];
                 const data = lines.slice(1)
                     .map(line => line.split(',').map(item => item.trim()))
                     .filter(line => line.some(item => item !== ""))
@@ -140,7 +140,7 @@ function displayResults() {
                 cellValue.className = 'cell-value';
 
                 // التحقق من الرسوب في المادة
-                if (header !== 'النتيجة') {
+                if (header !== 'باقي المواد ') {
                     const score = parseInt(data[index]) || 0;
                     const minScore = gradeRanges[branch][header]?.min;
 
@@ -153,7 +153,7 @@ function displayResults() {
                 }
 
                 // إذا كانت الخلية "النتيجة"، أضف حالة النجاح أو الرسوب
-                if (header === 'النتيجة') {
+                if (header === ' باقي المواد ') {
                     let status = 'قريبا';
                     let resultClass = 'success';  // اللون الافتراضي للنجاح
                     // التحقق من النتيجة الإجمالية والعربية
