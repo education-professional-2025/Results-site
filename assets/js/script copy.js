@@ -31,7 +31,7 @@ const gradeRanges = {
         'الفلسفة': { max: 400, min: 160 },
         'اللغة العربية': { max: 600, min: 240 },
         'التاريخ': { max: 300, min: 120 },
-        'الجغرافيا': { max: 400, min: 160 },
+        'الجغرافيا': { max: 300, min: 120 },
         'اللغة الانكليزية': { max: 400, min: 160 },
         'اللغة الفرنسية': { max: 300, min: 120 },
         'التربية الاسلامية': { max: 200, min: 80 },
@@ -130,18 +130,22 @@ function displayResults() {
                 const cell = document.createElement('div');
                 cell.className = 'cell';
 
+                // عنوان الخلية
                 const cellTitle = document.createElement('div');
                 cellTitle.className = 'cell-title';
                 cellTitle.textContent = header;
                 cell.appendChild(cellTitle);
 
+                // القيمة الرئيسية للخلية
                 const cellValue = document.createElement('div');
                 cellValue.className = 'cell-value';
 
+                // التحقق من الرسوب في المادة
                 if (header !== 'باقي المواد ') {
-                    const score = parseInt(data[index]) || 0;
+                    const score = parseInt(data[index]) || ث0;
                     const minScore = gradeRanges[branch][header]?.min;
 
+                    // إذا كانت الدرجة أقل من الحد الأدنى، نغير اللون إلى الأحمر
                     if (minScore && score < minScore) {
                         cellValue.innerHTML = `<span class="fail">${score}</span>`;
                     } else {
@@ -149,14 +153,27 @@ function displayResults() {
                     }
                 }
 
+                // إذا كانت الخلية "النتيجة"، أضف حالة النجاح أو الرسوب
                 if (header === ' باقي المواد ') {
                     let status = 'قريبا';
-                    let resultClass = 'success';
+                    let resultClass = 'success';  // اللون الافتراضي للنجاح
+                    // التحقق من النتيجة الإجمالية والعربية
+                    // if (totalScore < passingScore) {
+                    //     status = 'راسب';
+                    //     resultClass = 'fail';  // اللون الافتراضي للرسوب
+                    // }
+                    // التحقق من الرسوب في اللغة العربية
+                    // if (arabicScore < arabicPassingScore) {
+                    //     status = 'راسب (العربي)';
+                    //     resultClass = 'fail'; // اللون الافتراضي للرسوب
+                    // }
+
                     cellValue.innerHTML = `<span class="result-status ${resultClass}">${status}</span>`;
                 }
 
                 cell.appendChild(cellValue);
 
+                // إضافة القيم العليا والدنيا إن وجدت
                 const range = gradeRanges[branch][header] || {};
                 if (range.max) {
                     const rangeInfo = document.createElement('div');
