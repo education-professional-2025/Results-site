@@ -1,0 +1,44 @@
+img {
+width: 380px;
+height: auto;
+margin-bottom: 10px;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#resultsContainer {
+    position: fixed; /* لتثبيت الحاوية */
+    /* top: 50%; تحديد موضعها في منتصف الشاشة عموديًا */
+    right: -25%; /* إزاحة الحاوية إلى اليمين بحيث يظهر نصفها فقط */
+    transform: translateY(-50%); /* لضبط المحاذاة */
+    width: 50%; /* عرض الحاوية */
+    max-height: calc(100vh - 200px); /* ضبط الارتفاع */
+    padding: 2px; /* مسافة داخلية */
+    padding-left: 5px;
+    border: 2px solid #856e43; /* لون الإطار */
+    border-radius: 60px; /* زوايا مستديرة */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ظل للإطار */
+    background-color: #fff; /* خلفية الحاوية */
+    overflow-y: auto; /* شريط تمرير عمودي */
+}
+
+#resultsContainer::before {
+    position: absolute;
+    top: 50%; /* منتصف الحاوية عموديًا */
+    right: 100%; /* خارج الحاوية بالكامل */
+    transform: translateY(-50%); /* محاذاة */
+    width: 100px; /* عرض الدائرة */
+    height: 100px; /* ارتفاع الدائرة */
+    background-color: #856e43; /* لون الخلفية */
+    border-radius: 60px; /* لتصبح دائرية */
+    border: 3px solid #fff; /*إطار الدائرة*/
+    box-shadow: 0 0 0 2px #856e43; /* فراغ بين الدائرة والإطار */
+}
+
+#resultsContainer p {
+ height: 150px;
+ width: 400px;
+ text-align: center;
+ align-items: center;
+    border-radius: 60px; /* زوايا مستديرة */
+    background-color: #856e43; /* خلفية الحاوية */
+}

@@ -14,29 +14,26 @@ const csvFiles = {
 };
 
 // القيم العليا والدنيا لكل مادة
-const gradeRanges = { 
+const gradeRanges = {           
+
     'علمي': {
         'الرياضيات': { max: 600, min: 240 },
-        'اللغة العربية': { max: 400, min: 160 },
-        'العلوم': { max: 300, min: 120 },
+        'اللغه العربية': { max: 400, min: 160 },
+        'علم الأحياء': { max: 300, min: 120 },
         'الفيزياء': { max: 400, min: 160 },
         'الكيمياء': { max: 200, min: 80 },
         'اللغة الانكليزية': { max: 300, min: 120 },
         'اللغة الفرنسية': { max: 300, min: 120 },
-        'التربية الإسلامية': { max: 200, min: 80 },
-        'التربية الوطنية': { max: 200, min: 80 },
-        'المجموع العام': { max: 2900, min: 1160 },
+        'المجموع العام': { max: 2500, min: 1000 },
     },
     'ادبي': {
         'الفلسفة': { max: 400, min: 160 },
-        'اللغة العربية': { max: 600, min: 240 },
+        'اللغه العربية': { max: 600, min: 240 },
         'التاريخ': { max: 300, min: 120 },
-        'الجغرافيا': { max: 400, min: 160 },
+        'الجغرافيا': { max: 300, min: 120 },
         'اللغة الانكليزية': { max: 400, min: 160 },
-        'اللغة الفرنسية': { max: 300, min: 120 },
-        'التربية الاسلامية': { max: 200, min: 80 },
-        'التربية الوطنية': { max: 200, min: 80 },
-        'المجموع العام': { max: 2700, min: 1080 },
+        'اللغة الفرنسية': { max: 400, min: 160 },
+        'المجموع العام': { max: 2400, min: 960 },
 
     },
     'تاسع': {
@@ -45,7 +42,6 @@ const gradeRanges = {
         'العلوم العامة': { max: 300, min: 120 },
         'اللغة الانكليزية': { max: 300, min: 120 },
         'اللغة الفرنسية': { max: 300, min: 120 },
-        'التربية الاسلامية': { max: 200, min: 80 },
         'الاجتماعيات': { max: 200, min: 80 },
         'المجموع العام': { max: 3100, min: 1240 },
 
@@ -54,8 +50,8 @@ const gradeRanges = {
 
 // الأعمدة الخاصة بالمجموع العام ومادة العربي لكل فرع
 const columnIndices = {
-    'علمي': { total: 13, arabic: 6 },
-    'ادبي': { total: 12, arabic: 6 },
+    'علمي': { total: 11, arabic: 10 },
+    'ادبي': { total: 10, arabic: 6 },
     'تاسع': { total: 11, arabic: 10 }
 };
 
@@ -67,7 +63,7 @@ function loadData() {
             .then(csv => {
                 const lines = csv.split('\n');
                 const fileHeaders = lines[0].split(',').map(header => header.trim());
-                headers[branch] = [...fileHeaders, ' باقي المواد '];
+                headers[branch] = [...fileHeaders, 'النتيجة'];
                 const data = lines.slice(1)
                     .map(line => line.split(',').map(item => item.trim()))
                     .filter(line => line.some(item => item !== ""))
@@ -138,7 +134,7 @@ function displayResults() {
                 const cellValue = document.createElement('div');
                 cellValue.className = 'cell-value';
 
-                if (header !== 'باقي المواد ') {
+                if (header !== 'النتيجة') {
                     const score = parseInt(data[index]) || 0;
                     const minScore = gradeRanges[branch][header]?.min;
 
@@ -149,9 +145,21 @@ function displayResults() {
                     }
                 }
 
-                if (header === ' باقي المواد ') {
-                    let status = 'قريبا';
-                    let resultClass = 'success';
+                   // إذا كانت الخلية "النتيجة"، أضف حالة النجاح أو الرسوب
+                   if (header === 'النتيجة') {
+                    let status = 'ناجح';
+                    let resultClass = 'success';  // اللون الافتراضي للنجاح
+                    // التحقق من النتيجة الإجمالية والعربية
+                    if (totalScore < passingScore) {
+                        status = 'راسب';
+                        resultClass = 'fail';  // اللون الافتراضي للرسوب
+                    }
+                    // التحقق من الرسوب في اللغة العربية
+                    if (arabicScore < arabicPassingScore) {
+                        status = 'راسب (العربي)';
+                        resultClass = 'fail'; // اللون الافتراضي للرسوب
+                    }
+
                     cellValue.innerHTML = `<span class="result-status ${resultClass}">${status}</span>`;
                 }
 
@@ -183,8 +191,8 @@ function displayResults() {
 
 function getPassingScore(branch) {
     const maxScores = {
-        'علمي': 2900,
-        'ادبي': 2700,
+        'علمي': 2500,
+        'ادبي': 2400,
         'تاسع': 3100
     };
 
